@@ -22,6 +22,14 @@ All layout, spacing, color, and responsive breakpoints are handled with **Tailwi
 
 For all animations in this project i used framer-motion. Chosen because it provides a declarative, physics-based animation model that integrates naturally with React's component lifecycle. I also have previous experient with that to implement other Animated library i have to invest extra time.
 
+### ChartJs {`chart.js`}
+
+Use `chart.js` and `react-chart.js` library to implement area chart to the trends for patients visit all data are mocked. Choose this because it easy to implement, light weight, community support and support for `react.js`, and have varity of other charts as well. The main this which really stand this it customization.
+
+### Lucide Icon {`lucide-icon`}
+
+A icon library for all javascript library or framework, have tones of icons and customization light-weight, we can find any icon here almost any, that's why it on top of my choice it support react env and have easy to use just import and use, it also support props to customization for icon it uses svg behind the secene.
+
 > **Note on the decision to not use any thrid party table library here:** To implement the patients table i first consider to use ag-grid table comunity editon but because this project have only small number rows and also don't need table virtulization so that's why i did not use it instead i create it with html table with smooth animation by `framer-motion` and simple login handling like `sorting`
 
 ## React Hooks Used
