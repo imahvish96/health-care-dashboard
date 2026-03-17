@@ -1,36 +1,93 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# NeuVior Ops — Hospital Operations Dashboard
 
-## Getting Started
+A clean, responsive hospital operations dashboard built as a single-file React component. It includes a sticky header with dark/light mode toggle, user profile dropdown, animated KPI cards, a patient data table, a slide-in patient detail panel, and a footer — all without any routing, state management library, or backend.
 
-First, run the development server:
+---
+
+## Tech Stack
+
+### Framework
+
+In this project is used **Next.js 16+** it works equally well in any React 18+ project (Vite, CRA, etc.) since it is a pure client component. It is a combined of both cliend and server component.
+
+### Styling — Tailwind CSS v3
+
+All layout, spacing, color, and responsive breakpoints are handled with **Tailwind CSS utility classes**. No custom CSS files are needed. To implement dark mode i did not use Tailwind's built-in `dark:` variant — instead it's driven by a React boolean state (`dark`) that is passed through a context api to show that how we can manage small statement management. This gives us full programmatic control over the toggle animation and avoids relying on `prefers-color-scheme` or a class on `<html>`.
+
+---
+
+## Third-Party Libraries
+
+### Framer Motion (`framer-motion`)
+
+For all animations in this project i used framer-motion. Chosen because it provides a declarative, physics-based animation model that integrates naturally with React's component lifecycle. I also have previous experient with that to implement other Animated library i have to invest extra time.
+
+> **Note on the decision to not use any thrid party table library here:** To implement the patients table i first consider to use ag-grid table comunity editon but because this project have only small number rows and also don't need table virtulization so that's why i did not use it instead i create it with html table with smooth animation by `framer-motion` and simple login handling like `sorting`
+
+## React Hooks Used
+
+- `useState`
+- `useEffect`
+- `useRef`
+- `useCallback`
+- `useMemo`
+- `useContext`
+
+---
+
+## On Inline Styles
+
+You will notice a mix of Tailwind classes and inline `style={{}}` props throughout the component. This was a deliberate tradeoff, not an oversight.
+
+Tailwind classes are used for everything that is **static** — layout, spacing, border radius, font sizes, standard colors, transitions. These are stable values that do not change at runtime.
+
+Used inline style because to make my work faster, without digging into Tailwind classed documents.
+
+---
+
+## Component Breakdown
+
+I separated the components to keep the code readable and reusable. It also helps with future scalability. For example, the search bar is currently simple, but it’s isolated so it can later evolve into a more advanced type-ahead search with suggestions without impacting the rest of the UI.
+
+| Component          | Responsibility                                                     |
+| ------------------ | ------------------------------------------------------------------ |
+| `Header`           | Renders the application’s header with navigation and actions..     |
+| `Footer`           | Renders the application’s footer section.                          |
+| `Cards`            | Displays KPI/statistics cards with icons, values, and badges.      |
+| `PatientTable`     | Main table for displaying and managing patient data.               |
+| `SidePanel`        | Shows detailed information for a selected patient in a side panel. |
+| `Button`           | Reusable button component for actions.                             |
+| `Checkbox`         | Custom checkbox input for toggling options.                        |
+| `Shimmer`          | Displays loading skeletons for table rows.                         |
+| `ToggleSwitch`     | Switch/toggle component for boolean options.                       |
+| `SearchBar`        | Input field for searching/filtering data.                          |
+| `DataTableRow`     | Renders individual rows in the patient table.                      |
+| `NotFoundTableRow` | Displays a message when no patient data is available.              |
+| `Signal`           | Reusable component to displays a styled badge indicating a status. |
+
+---
+
+## Installation
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# 1. Install dependencies
+npm run install
+
+or
+
+pnpm run install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## What Could Be Improved in a Production Version
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Split into multiple files** — can follow `ATOMIC` file structure.
+- **Real data layer** — replace `patientRows[]` with an API call using `useQuery` (React Query / TanStack Query)
+- **Accessibility** — add `aria-label`, `role`, and keyboard navigation to the dropdown and table rows
+- **AG Grid server-side row model** — if the patient list grows beyond a few hundred rows, switch to AG Grid's server-side model with pagination
+- **Design tokens** — replace hardcoded hex values in `statusConfig` and `priorityConfig` with CSS custom properties
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+_Built with React 18 · Next.js 16 · Tailwind CSS v3 · Framer Motion_
