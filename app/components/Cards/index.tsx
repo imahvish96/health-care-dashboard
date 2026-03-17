@@ -5,7 +5,7 @@ import Signal from "../Signal";
 
 interface CardProps {
   card: {
-    icon: React.ComponentType<{ className?: string }>;
+    icon: React.ComponentType<{ className?: string; size?: number }>;
     iconColor: string;
     iconBgLight: string;
     iconBgDark: string;
@@ -16,7 +16,7 @@ interface CardProps {
     value: string;
     badge: string;
     status: string;
-    badgeIcon: React.ComponentType<{ className?: string }>;
+    badgeIcon: React.ComponentType<{ className?: string; size?: string }>;
   };
   index: number;
 }
@@ -112,7 +112,7 @@ function Cards({ card, index }: CardProps) {
           <Signal
             state={card.status}
             value={card.badge}
-            icon={<BadgeIcon size="14" />}
+            icon={<BadgeIcon className="..." size="14" />}
           />
         </div>
       </div>
